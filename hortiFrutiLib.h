@@ -217,6 +217,35 @@ void editarProduto() {
         printf("Produto editado com sucesso!\n");
         pausar();
 }
+void visualizarProduto() {
+    limparTela();
+    if (totalProdutos == 0) {
+        printf("Nenhum produto cadastrado.\n");
+        pausar();
+        return;
+    }
+
+    int id;
+    printf("Digite o ID do produto que deseja visualizar: ");
+    scanf("%d", &id);
+    getchar();
+
+    int encontrado = 0;
+    for (int i = 0; i < totalProdutos; i++) {
+        if (produto[i].id == id) {
+            printf("ID: %d | Nome: %s | Tipo: %s | Quantidade: %d | Preco: %.2f\n", 
+                   produto[i].id, produto[i].nome, produto[i].tipo, produto[i].quantidade, produto[i].preco);
+            encontrado = 1;
+            break;
+        }
+    }
+
+    if (!encontrado) {
+        printf("Nenhum produto encontrado com o ID informado.\n");
+    }
+
+    pausar();
+}
 
 
 

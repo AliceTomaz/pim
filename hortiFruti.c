@@ -30,9 +30,7 @@ int main() {
                editarProduto();
                break;
             case 4:
-                printf("--------------------------\n");
-                printf("------- Vizualizar -------\n");
-                printf("--------------------------\n");
+                visualizarProduto();
                 break;
             default:
                 limparTela();
