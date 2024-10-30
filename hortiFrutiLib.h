@@ -8,6 +8,7 @@
 #define MAX_PRODUTOS 100
 #define TAMANHO_STRING 50
 
+
 typedef struct {
     int id;
     char nome[TAMANHO_STRING];
@@ -22,6 +23,11 @@ int totalProdutos = 0;
 void pausar() {
     printf("\nPressione Enter para continuar...");
     getchar();
+}
+
+
+void limparTela() {
+    system("cls || clear");
 }
 
 void salvarProdutos() {
@@ -59,7 +65,7 @@ void carregarProdutos() {
 
 
 void cadastrarProduto() {
-    system("cls");
+    limparTela();
     printf("--------------------------\n");
     printf("-------- Cadastro --------\n");
     printf("--------------------------\n");
@@ -107,5 +113,113 @@ void cadastrarProduto() {
     printf("Produto cadastrado com sucesso!\n");
     pausar();
 }
+
+void excluirProduto() {
+    limparTela();
+    if (totalProdutos == 0) {
+        printf("Nenhum produto cadastrado.\n");
+        pausar();
+        return;
+    }
+
+    int id;
+    printf("Digite o ID do produto que deseja excluir: ");
+    scanf("%d", &id);
+    getchar();
+
+    int indice = -1;
+    for (int i = 0; i < totalProdutos; i++) {
+        if (produto[i].id == id) {
+            indice = i;
+            break;
+        }
+    }
+
+    if (indice == -1) {
+        printf("ID nao encontrado.\n");
+        pausar();
+        return;
+    }
+
+    for (int i = indice; i < totalProdutos - 1; i++) {
+        produto[i] = produto[i + 1];
+    }
+    totalProdutos--;
+
+    salvarProdutos();
+    printf("Produto excluido com sucesso!\n");
+    pausar();
+}
+
+void editarProduto() {
+    limparTela();
+        if (totalProdutos == 0) {
+            printf("Nenhum produto cadastrado.\n");
+            pausar();
+            return;
+        }
+
+        int id;
+        printf("Digite o ID do produto que deseja editar: ");
+        scanf("%d", &id);
+        getchar();
+
+        int indice = -1;
+        for (int i = 0; i < totalProdutos; i++) {
+            if (produto[i].id == id) {
+                indice = i;
+                break;
+            }
+        }
+
+        if (indice == -1) {
+            printf("ID invalido.\n");
+            pausar();
+            return;
+        }
+
+        printf("-------- Editar Produto de ID: %d --------\n", produto[indice].id);
+        printf("Aperte ENTER para manter os dados atuais.\n");
+
+        printf("Nome atual: %s\nDigite o nome novo: ", produto[indice].nome);
+        char novoNome[TAMANHO_STRING];
+        fgets(novoNome, TAMANHO_STRING, stdin);
+        novoNome[strcspn(novoNome, "\n")] = '\0';
+        if (strlen(novoNome) > 0) {
+            strcpy(produto[indice].nome, novoNome);
+        }
+
+        printf("Tipo atual: %s\nDigite o tipo novo: ", produto[indice].tipo);
+        char novoTipo[TAMANHO_STRING];
+        fgets(novoTipo, TAMANHO_STRING, stdin);
+        novoTipo[strcspn(novoTipo, "\n")] = '\0';
+        if (strlen(novoTipo) > 0) {
+            strcpy(produto[indice].tipo, novoTipo);
+        }
+
+        printf("\nQuantidade atual: %d\nDigite a nova quantidade: ", produto[indice].quantidade);
+        char novaQuantidade[10];
+        fgets(novaQuantidade, 10, stdin);
+        novaQuantidade[strcspn(novaQuantidade, "\n")] = '\0';
+        if (strlen(novaQuantidade) > 0) {
+            produto[indice].quantidade = atoi(novaQuantidade);
+        }
+
+        printf("\nPreco atual: %.2f\nDigite o novo preco do produto: ", produto[indice].preco);
+        char novoPreco[20];
+        fgets(novoPreco, 20, stdin);
+        novoPreco[strcspn(novoPreco, "\n")] = '\0';
+        if (strlen(novoPreco) > 0) {
+            produto[indice].preco = atof(novoPreco);
+        }
+
+        salvarProdutos();
+        printf("Produto editado com sucesso!\n");
+        pausar();
+}
+
+
+
+
 
 #endif

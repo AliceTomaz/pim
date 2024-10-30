@@ -24,22 +24,18 @@ int main() {
                 cadastrarProduto();
                 break;
             case 2:
-                printf("--------------------------\n");
-                printf("--------- Excluir --------\n");
-                printf("--------------------------\n");
+                excluirProduto();
                 break;
             case 3:
-                printf("--------------------------\n");
-                printf("--------- Editar ---------\n");
-                printf("--------------------------\n");
-                break;
+               editarProduto();
+               break;
             case 4:
                 printf("--------------------------\n");
                 printf("------- Vizualizar -------\n");
                 printf("--------------------------\n");
                 break;
             default:
-                system("cls");
+                limparTela();
                 printf("Opcao invalida.\n");
                 break;
         }
