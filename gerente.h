@@ -43,7 +43,8 @@ void senhaGerente() {
                 printf("3 - Editar Produto      \n");
                 printf("4 - Visualizar Produto  \n");
                 printf("5 - Excluir produto     \n");
-                printf("6 - Sair do Programa    \n");
+                printf("6 - Exportar relatorios \n");
+                printf("7 - Sair do Programa    \n");
                 scanf("%d", &opcao); // Captura a opção do gerente
                 getchar(); // Consome o caractere de nova linha para evitar erros
 
@@ -65,6 +66,9 @@ void senhaGerente() {
                         excluirProduto(); // Exclui um produto do estoque
                         break;
                     case 6:
+                        exportarRelatorios(); // Exportar relatórios de um arquivo .txt
+                        break;
+                    case 7:
                         sair(); // Sai do programa
                         break;
                     default:
@@ -73,7 +77,7 @@ void senhaGerente() {
                         break;
                 }
 
-            } while (opcao != 6); // Mantem o menu ativo ate o gerente optar por sair
+            } while (opcao != 7); // Mantem o menu ativo ate o gerente optar por sair
         } else {
             /* Caso as credenciais sejam invalidas */
             printf("Usuario ou senha invalido.\n");
